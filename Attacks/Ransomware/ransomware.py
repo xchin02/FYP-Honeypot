@@ -1,7 +1,7 @@
 import os
 from cryptography.fernet import Fernet
 
-main_dir = "/home/kali"
+main_dir = "/home/pi"
 
 key = Fernet.generate_key()
 
