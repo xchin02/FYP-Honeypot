@@ -1,4 +1,4 @@
-# FYP-Honeypot-Attacks
+# FYP-Honeypot
 This repository contains malicious files meant for educational purposes only.
 
 ## Project Objective
