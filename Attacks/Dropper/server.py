@@ -7,6 +7,8 @@
 import base64
 import logging
 import socket
+import os
+import signal
 
 
 class Server:
@@ -58,6 +60,7 @@ class Server:
             # Send data to the client and shut down the server.
             encoded_payload = base64.b64encode(self.malicious_code)
             connection.send(encoded_payload)
+        os.kill(os.getpid(), signal.SIGINT)
 
 
 if __name__ == '__main__':
