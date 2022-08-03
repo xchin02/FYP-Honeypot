@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from scapy.all import *
 from scapy.layers.inet import IP, ICMP, TCP
 import socket
