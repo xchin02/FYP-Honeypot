@@ -34,6 +34,6 @@ Monitor traffic on Wireshark and create rules and alerts using Snort
 ●	Test out the rules for alerts when attacks are detected  
 
 ## Contributors
-**Xavier Chin (Project Lead)** - Setup AWS infrastructure. Setup telegram bot with temperature, humidity values with snort alerts. Attack use cases: Botnet and Keylogger. Snort rules: Botnet and Keylogger.
-**Shannon Soon** - Setup PiCockpit. Attack use cases: Dropper and DoS. Snort rules: Dropper and DoS. Setup telegram snort alert bot.
+**Xavier Chin (Project Lead)** - Setup AWS infrastructure. Setup telegram bot with temperature, humidity values with snort alerts. Attack use cases: Botnet and Keylogger. Snort rules: Botnet and Keylogger.  
+**Shannon Soon** - Setup PiCockpit. Attack use cases: Dropper and DoS. Snort rules: Dropper and DoS. Setup telegram snort alert bot.  
 **Janessa Ng** - Created attack scenarios. Attack use cases: Trojan, SSH brute force, SQL injection. Snort rules: Trojan, SSH brute force, SQL injection.
